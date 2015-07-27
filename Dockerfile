@@ -4,9 +4,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       cmake && \
       rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/h2o/h2o && \
+RUN git clone https://github.com/h2o/h2o --recursive && \
       cd h2o && \
-      git submodule update --init --recursive && \
       cmake . && \
       make h2o
 
