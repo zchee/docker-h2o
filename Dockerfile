@@ -8,7 +8,7 @@ ENV MAKEFLAGS -j8
 
 RUN git clone https://github.com/h2o/h2o --recursive && \
       cd h2o && \
-      cmake -DWITH_BUNDLED_SSL=off . && \
+      cmake -DWITH_BUNDLED_SSL=on . && \
       make && \
       make install
 
