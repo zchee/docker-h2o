@@ -1,6 +1,6 @@
-## h2o
+## H2O
 
-This is Dockerfile for trying [h2o](https://github.com/h2o/h2o).
+This is Dockerfile for [H2O](https://github.com/h2o/h2o).
 
 ## Usage
 
@@ -23,7 +23,7 @@ $ docker run --rm -p <port>:<port> zchee/h2o h2o.conf
 ```
 
 ## h2o.conf
-Default h2o configure path: `/etc/h2o/h2o.conf`
+Default H2O configure path: `/etc/h2o/h2o.conf`
 
 Default configure, 
 
@@ -91,12 +91,12 @@ net.ipv4.tcp_timestamps = 0
 
 | Package         | Build              | Dockerfile                                                                    | Dependent |
 |-----------------|--------------------|-------------------------------------------------------------------------------|-----------|
-| libuv           | from source (HEAD) | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| wslay           | from source (HEAD) | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| mruby           | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| libmruby        | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| cmake           | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| ninja           | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
+| libuv           | from source (HEAD) | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | H2O       |
+| wslay           | from source (HEAD) | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | H2O       |
+| mruby           | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | H2O       |
+| libmruby        | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | H2O       |
+| cmake           | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | H2O       |
+| ninja           | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | H2O       |
 | build-essential | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | *none*    |
 | checkinstall    | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
 | python-sphinx   | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
