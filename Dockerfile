@@ -1,11 +1,34 @@
 FROM zchee/buildpack-deps
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-      cmake ninja-build && \
-      rm -rf /var/lib/apt/lists/*
-
+WORKDIR /
 ENV MAKEFLAGS -j8
 
+# Install cmake, ninja, and dependency h2o packages
+# h2o: cmake ninja-build mruby libmruby-dev
+# wslay: build-essential checkinstall python-sphinx libcunit1-dev nettle-dev
+RUN apt-get update && apt-get install -y --no-install-recommends \
+      cmake ninja-build mruby libmruby-dev build-essential checkinstall python-sphinx libcunit1-dev nettle-dev && \
+      rm -rf /var/lib/apt/lists/*
+
+# Install libuv
+RUN git clone https://github.com/libuv/libuv && \
+      cd libuv && \
+      sh autogen.sh && \
+      ./configure && \
+      make && \
+      make install
+
+# Installl wslay
+RUN git clone https://github.com/tatsuhiro-t/wslay && \
+      cd wslay && \
+      autoreconf -i && \
+      automake && \
+      autoconf && \
+      ./configure && \
+      make && \
+      make install
+
+# Install h2o use ninja
 RUN git clone https://github.com/h2o/h2o --recursive && \
       cd h2o && \
       cmake -G 'Ninja' -DWITH_BUNDLED_SSL=off . && \
