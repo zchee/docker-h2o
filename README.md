@@ -22,9 +22,57 @@ To custom config file run,
 $ docker run --rm -p <port>:<port> zchee/h2o h2o.conf
 ```
 
-sysctl.conf
+## h2o.conf
+Default h2o configure path: `/etc/h2o/h2o.conf`
 
+Default configure, 
+
+```conf
+max-connections: 65536
+limit-request-body: 536870912
+num-threads: 16
+num-name-resolution-threads: 1
+http2-reprioritize-blocking-assets: ON
+tcp-fastopen: 33554432
+
+listen: 80
+hosts:
+  "127.0.0.1:80":
+    paths:
+      /:
+        file.dir: examples/doc_root
+
+listen: 8080
+listen:
+  port: 8081
+  ssl:
+    certificate-file: examples/h2o/server.crt
+    key-file: examples/h2o/server.key
+hosts:
+  "127.0.0.1.xip.io:8080":
+    paths:
+      /:
+        file.dir: examples/doc_root
+    access-log: /dev/stdout
+  "alternate.127.0.0.1.xip.io:8081":
+    listen:
+      port: 8081
+      ssl:
+        certificate-file: examples/h2o/alternate.crt
+        key-file: examples/h2o/alternate.key
+    paths:
+      /:
+        file.dir: examples/doc_root.alternate
+    access-log: /dev/stdout
 ```
+
+## sysctl.conf
+
+[WIP] Default `/etc/sysctl.conf` is [https://klaver.it/linux/sysctl.conf](https://klaver.it/linux/sysctl.conf)  
+It will refactoring later.
+
+based, 
+```conf
 net.core.somaxconn=32768
 net.core.netdev_max_backlog=32768
 net.ipv4.tcp_max_syn_backlog=32768
@@ -39,20 +87,20 @@ net.ipv4.ip_local_port_range= 1024 65535
 net.ipv4.tcp_timestamps = 0
 ```
 
-## Package
+## Installed packages
 
-| Package         | Build   | From                                                                          | Dependent |
-|-----------------|---------|-------------------------------------------------------------------------------|-----------|
-| libuv           | HEAD    | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| wslay           | HEAD    | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| mruby           | apt-get | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| libmruby        | apt-get | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| cmake           | apt-get | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| ninja           | apt-get | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
-| build-essential | apt-get | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | *none*    |
-| checkinstall    | apt-get | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
-| python-sphinx   | apt-get | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
-| libcunit1-dev   | apt-get | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
-| nettle-dev      | apt-get | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
-| apt-utils       | apt-get | [zchee/docker-buildpack-deps](https://github.com/zchee/docker-buildpack-deps) | *none*    |
-| locale          | apt-get | [zchee/docker-buildpack-deps](https://github.com/zchee/docker-buildpack-deps) | *none*    |
+| Package         | Build              | Dockerfile                                                                    | Dependent |
+|-----------------|--------------------|-------------------------------------------------------------------------------|-----------|
+| libuv           | from source (HEAD) | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
+| wslay           | from source (HEAD) | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
+| mruby           | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
+| libmruby        | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
+| cmake           | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
+| ninja           | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | h2o       |
+| build-essential | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | *none*    |
+| checkinstall    | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
+| python-sphinx   | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
+| libcunit1-dev   | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
+| nettle-dev      | apt-get            | [zchee/docker-h2o](https://github.com/zchee/docker-h2o)                       | wslay     |
+| apt-utils       | apt-get            | [zchee/docker-buildpack-deps](https://github.com/zchee/docker-buildpack-deps) | *none*    |
+| locale          | apt-get            | [zchee/docker-buildpack-deps](https://github.com/zchee/docker-buildpack-deps) | *none*    |
