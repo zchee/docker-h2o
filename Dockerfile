@@ -52,7 +52,6 @@ RUN git clone https://github.com/h2o/h2o --recursive && \
       ninja install
 
 WORKDIR /h2o
-COPY sysctl.conf /etc/
 
 RUN mkdir -p /etc/h2o /var/run/h2o/ /var/log/h2o/
 COPY h2o.conf /etc/h2o/
