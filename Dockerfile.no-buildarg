@@ -27,8 +27,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       rm -rf /var/lib/apt/lists/*
 
 # Install libuv
-ARG LIBUV_EXTRA_ARGS
-RUN git clone ${LIBUV_EXTRA_ARGS} https://github.com/libuv/libuv && \
+RUN git clone https://github.com/libuv/libuv && \
       cd libuv && \
       sh autogen.sh && \
       ./configure && \
@@ -36,8 +35,7 @@ RUN git clone ${LIBUV_EXTRA_ARGS} https://github.com/libuv/libuv && \
       make install
 
 # Installl wslay
-ARG WSLAY_EXTRA_ARGS
-RUN git clone ${WSLAY_EXTRA_ARGS} https://github.com/tatsuhiro-t/wslay && \
+RUN git clone https://github.com/tatsuhiro-t/wslay && \
       cd wslay && \
       autoreconf -i && \
       automake && \
@@ -47,8 +45,7 @@ RUN git clone ${WSLAY_EXTRA_ARGS} https://github.com/tatsuhiro-t/wslay && \
       make install
 
 # Install h2o use ninja
-ARG H2O_EXTRA_ARGS
-RUN git clone ${H2O_EXTRA_ARGS} https://github.com/h2o/h2o --recursive && \
+RUN git clone https://github.com/h2o/h2o --recursive && \
       cd h2o && \
       cmake -G 'Ninja' -DWITH_BUNDLED_SSL=off . && \
       ninja && \

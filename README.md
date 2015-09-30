@@ -2,13 +2,21 @@
 
 This is Dockerfile for [H2O](https://github.com/h2o/h2o).
 
-## Usage
-
-To Build,
+Build docker container,
 
 ```bash
 $ docker build -t zchee/h2o .
 ```
+
+`docker-h2o` now support the `docker --build-arg` new feature build flag.  
+If you want set specific `git clone` flag, e.g.
+
+```bash
+$ docker build -t zchee/h2o --build-arg H2O_EXTRA_ARGS='-b v1.5.0' .
+```
+Then, checkout H2O cloned v1.5.0 tag.
+
+## Usage
 
 To run,
 
