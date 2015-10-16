@@ -1,4 +1,5 @@
 ## H2O
+[![Circle CI](https://circleci.com/gh/zchee/docker-h2o.svg?style=svg)](https://circleci.com/gh/zchee/docker-h2o)  
 
 This is Dockerfile for [H2O](https://github.com/h2o/h2o).
 
