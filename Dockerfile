@@ -1,23 +1,13 @@
 FROM buildpack-deps:jessie
-MAINTAINER zchee <zcheeee@gmail.com>
+MAINTAINER zchee <zchee.io@gmail.com>
 
 # set noninteractive
 ENV DEBIAN_FRONTEND noninteractive
+ENV MAKEFLAGS -j8
 # sed to cdn server for apt source url
 RUN sed -i 's/httpredir.debian.org/cdn.debian.net/' /etc/apt/sources.list
-# apt-get update use cdn server
-RUN apt-get update
-# set locale
-RUN apt-get install -y --no-install-recommends apt-utils locales
-ENV LANG en_US.UTF-8
-RUN echo $LANG UTF-8 > /etc/locale.gen
-RUN locale-gen
-RUN update-locale LANG=$LANG
-ENV LC_ALL C
-ENV LC_ALL $LANG
 
 WORKDIR /
-ENV MAKEFLAGS -j8
 
 # Install cmake, ninja, and dependency h2o packages
 # h2o: cmake ninja-build mruby libmruby-dev
