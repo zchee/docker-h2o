@@ -10,7 +10,8 @@ ARG WSLAY_EXTRA_ARGS
 # dependency packages
 #  - h2o: cmake ninja-build mruby libmruby-dev
 #  - wslay: build-essential checkinstall python-sphinx libcunit1-dev nettle-dev
-RUN apt-get update && \
+RUN set -ex && \
+	apt-get update && \
 	apt-get install -y --no-install-recommends \
 		cmake \
 		ninja-build \
