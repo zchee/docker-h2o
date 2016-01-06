@@ -21,9 +21,9 @@ RUN set -ex && \
 		python-sphinx \
 		libcunit1-dev \
 		nettle-dev && \
-	rm -rf /var/lib/apt/lists/*
-
-RUN git clone ${LIBUV_EXTRA_ARGS} https://github.com/libuv/libuv && \
+	rm -rf /var/lib/apt/lists/* && \
+	\
+	git clone ${LIBUV_EXTRA_ARGS} https://github.com/libuv/libuv && \
 		cd libuv && \
 		sh autogen.sh && \
 		./configure && \
@@ -38,9 +38,9 @@ RUN git clone ${LIBUV_EXTRA_ARGS} https://github.com/libuv/libuv && \
 		cd h2o && \
 		cmake -G 'Ninja' -DWITH_BUNDLED_SSL=OFF . && \
 		ninja && \
-		ninja install
-
-RUN mkdir -p /etc/h2o /var/run/h2o /var/log/h2o && \
+		ninja install && \
+	\
+	mkdir -p /etc/h2o /var/run/h2o /var/log/h2o && \
 	touch /var/run/h2o/access-log /var/run/h2o/error-log
 
 COPY ./h2o.conf /etc/h2o
