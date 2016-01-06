@@ -27,7 +27,7 @@ RUN git clone ${LIBUV_EXTRA_ARGS} https://github.com/libuv/libuv && \
 		cd libuv && \
 		sh autogen.sh && \
 		./configure && \
-		make -j$(nproc) && \
+		make -j && \
 		make install && \
 	git clone ${WSLAY_EXTRA_ARGS} https://github.com/tatsuhiro-t/wslay && \
 		cd wslay && \
