@@ -30,12 +30,9 @@ RUN git clone ${LIBUV_EXTRA_ARGS} https://github.com/libuv/libuv && \
       make install && \
 	git clone ${WSLAY_EXTRA_ARGS} https://github.com/tatsuhiro-t/wslay && \
       cd wslay && \
-      autoreconf -i && \
-      automake && \
-      autoconf && \
-      ./configure && \
-      make -j$(nproc) && \
-      make install && \
+      cmake -G 'Ninja' . && \
+	  ninja && \
+	  ninja install && \
 	git clone ${H2O_EXTRA_ARGS} https://github.com/h2o/h2o --recursive && \
       cd h2o && \
       cmake -G 'Ninja' -DWITH_BUNDLED_SSL=off . && \
