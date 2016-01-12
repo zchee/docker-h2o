@@ -5,17 +5,21 @@ services:
 
 language: c
 
-compiler:
-  - clang
-  - gcc
-
-env:
-  DOCKER_VERSION: 1.9.1
+matrix:
+  include:
+  - compiler: clang
+    env:
+    - DOCKER_VERSION=1.9.1
+    - DOCKER_INSTALL_URL=get.docker.com/builds
+  - compiler: clang
+    env:
+    - DOCKER_VERSION=1.10.0-dev
+    - DOCKER_INSTALL_URL=master.dockerproject.org
 
 before_install:
   - sudo service docker stop
   - sudo rm $(which -a docker)
-  - curl -L https://get.docker.com/builds/`uname -s`/`uname -m`/docker-${DOCKER_VERSION} > docker
+  - curl -L https://${DOCKER_INSTALL_URL}/`uname -s`/`uname -m`/docker-${DOCKER_VERSION} > docker
   - chmod +x docker
   - sudo mv docker /usr/bin
   - sudo service docker start
@@ -29,4 +33,4 @@ notifications:
   email: false
   slack:
     rooms:
-      secure: W37wQbWT+IR389zOGorMgWp7lG8xdVp9qb4aGES9yi6ohkIaQ/NHmzY9fT+3YeRy2MzMs+alX5SFIQTYqBVMVNtYCuygxz0zwtuZvIksjM/FwkVtMC6CTGQuPOsnSprOhB23DMKiIgGnB0ggsJDaQoGzUOG8EoBmuiKniWDqc0DCrS/vwk/iI6g68FQVCkWA2oQw3GgStKKrLwcUjEA5Y6aTrIYscPjmCFtJh5UOxCgQ+8Y/oqcxvqkb/mnuhYABySbVKhGSdtVnaQwNziLqfwHbCiRVzlwdJFfp3OlRKhHHStBe+Bu83pZYWMXAKZ/CFSXCADadX4x0P5eO6dbbJd2h1gS2BO/JppSJNlbk2WBhUAs5YniKHOxde7h9JilOgJceRF5CLzLb/5N+5/5w8CKBs8tzEcU13ilzyJ2BiRgvOsJ6eLmblQDLS29arL393W0IVTccuxqeKIL0asrXLOwFhK13UeQqPwPGRCKIMbLkEPARer+wteMMLNglGjPx9GbsTb9JyLqqoe7e4Wc7cm0OcPcMKxGnpyrxVk/57q32r6hcko4tL2PTySYHaqFx5CIPFk3TtsM/d6g4MSvmoh5Oys4vib2vZ5sJbHWIk1Fn/+ukRMRLuie7GYCyDwz/J0gPKsc+wG/4OZJIx16Oi89flA59mNPQdAGKb7+I5O0=
+      secure: JWoUF3PGuK8n+M1zF39dDYiVhBS+jxQXEDBr4Jm6PnlV9JOiHYC+TyklqFrx7BfigA7VD9xEwxMlN/cui2gRPh7HFEKFjAP2ttrR4XPxGEaaCH17ClOecQMEAHEO+iJJcCyHeZUlu/TrvETTVGq1myGybyqDFNeJ6N669dFVUZZ9IayRR97sqvJ6LkjHG4UTj83zi1a+THp4Q2mt3onRR/Z3gIT999EgV7k08qg6cd5SL3uFja35OvLIhUjLlxyXnB2icDaRWMvcGQdS+7QUkPXefKgh9PADlO38o1Tof5xuRy8/rhqwns0iYtKgVfN7pVI8nrfFOrcahYjwh/IRQE4OY3Ai+HqRdZWOf7/GGkcb+0sKihsMnKaFVz1tuWvZL/86NONHaY9YvVs7Gjdf7YxF8BS6k6gUCYNixS+1GcR8JM6aHjBmg02QSAc0XdLpYrGAYAG93KQ99pqzWNbQ9biP7x5YeXoky252UBywlajyDNYaq6NaJk5aNW29rXiFbbPklUIoaJsDRtInsVmicJsMiFI6C+Mm4IcgqyTjt2L7fKxklx0bIX9KEfu54fBd47R7kwDhofzFKCFNsb23jS6Z2LS5NuqtslYrcrT3EZ3jP6rFhzVQfAqhL4A3/EIgY+sPTahTDgsdQPOXXHXeuuM3Yi0Rdy0DYKA6aPSeB2o=
