@@ -1,5 +1,3 @@
-sudo: required
-
 services:
   - docker
 
@@ -7,19 +5,25 @@ language: c
 
 matrix:
   include:
-  - compiler: clang
+
+  - sudo: required
+    dist: trusty
+    compiler: clang
     env:
     - DOCKER_VERSION=1.9.1
-    - DOCKER_INSTALL_URL=get.docker.com/builds
-  - compiler: clang
+    - DOCKER_INSTALL_URL="get.docker.com/builds/$(uname -s)/$(uname -m)"
+
+  - sudo: required
+    dist: trusty
+    compiler: clang
     env:
     - DOCKER_VERSION=1.10.0-dev
-    - DOCKER_INSTALL_URL=master.dockerproject.org
+    - DOCKER_INSTALL_URL=master.dockerproject.org/linux/amd64
 
 before_install:
   - sudo service docker stop
   - sudo rm $(which -a docker)
-  - curl -L https://${DOCKER_INSTALL_URL}/`uname -s`/`uname -m`/docker-${DOCKER_VERSION} > docker
+  - curl -L https://${DOCKER_INSTALL_URL}/docker-${DOCKER_VERSION} > docker
   - chmod +x docker
   - sudo mv docker /usr/bin
   - sudo service docker start
