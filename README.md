@@ -1,5 +1,6 @@
 ## H2O
-[![Circle CI](https://circleci.com/gh/zchee/docker-h2o.svg?style=svg)](https://circleci.com/gh/zchee/docker-h2o)  
+TravisCI: [![Build Status](https://travis-ci.org/zchee/docker-h2o.svg?branch=master)](https://travis-ci.org/zchee/docker-h2o)  
+CircleCI: [![Circle CI](https://circleci.com/gh/zchee/docker-h2o.svg?style=svg)](https://circleci.com/gh/zchee/docker-h2o)  
 
 This is Dockerfile for [H2O](https://github.com/h2o/h2o).
 
