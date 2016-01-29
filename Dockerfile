@@ -1,10 +1,10 @@
 FROM buildpack-deps:jessie
-MAINTAINER zchee <zchee.io@gmail.com>
+MAINTAINER zchee <k@zchee.io>
 
 # Set openssl arg and extra args
-ARG H2O_EXTRA_ARGS
 ARG LIBUV_EXTRA_ARGS
 ARG WSLAY_EXTRA_ARGS
+ARG H2O_EXTRA_ARGS
 
 # Install libuv, wslay and h2o
 # dependency packages
@@ -27,7 +27,7 @@ RUN set -ex && \
 		cd libuv && \
 		sh autogen.sh && \
 		./configure && \
-		make -j$(($(nproc)+1)) && \
+		make -j $(($(nproc)+1)) && \
 		make install && \
 	git clone ${WSLAY_EXTRA_ARGS} https://github.com/tatsuhiro-t/wslay && \
 		cd wslay && \
